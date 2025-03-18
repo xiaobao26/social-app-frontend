@@ -11,4 +11,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    reportCompressedSize: false, // Disables size check to avoid warnings
+    outDir: 'dist',
+    chunkSizeWarningLimit: 600, // Increase limit to avoid warnings
+  }
 })

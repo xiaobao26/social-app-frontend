@@ -31,7 +31,7 @@ const ChatRoom:React.FC = () => {
     // prevent duplicated event register
     const isRegistered = useRef(false)
 
-    const registerReceiveJoinRoomMessageEvent = (user: string, message: string) => {
+    const registerReceiveJoinRoomMessageEvent = (_: string, message: string) => {
         setAdminMessages((prevMessages) => [...prevMessages, message])
     }
 
