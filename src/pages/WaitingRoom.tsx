@@ -18,8 +18,12 @@ const WaitingRoom: React.FC = () => {
         event.preventDefault()
         // create connection
         const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("https://social-app-f8fme2f5anarcpf7.australiacentral-01.azurewebsites.net/Chat")
+        .withUrl("https://social-app-f8fme2f5anarcpf7.australiacentral-01.azurewebsites.net/Chat",  {
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets,
+        })
         .withAutomaticReconnect()
+        .configureLogging(signalR.LogLevel.Information)
         .build();
 
         // start connection
