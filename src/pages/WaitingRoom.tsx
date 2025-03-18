@@ -18,7 +18,7 @@ const WaitingRoom: React.FC = () => {
         event.preventDefault()
         // create connection
         const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("http://localhost:5005/Chat")
+        .withUrl("https://social-app-f8fme2f5anarcpf7.australiacentral-01.azurewebsites.net/Chat")
         .withAutomaticReconnect()
         .build();
 
