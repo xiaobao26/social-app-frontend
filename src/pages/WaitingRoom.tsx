@@ -49,7 +49,7 @@ const WaitingRoom: React.FC = () => {
         <div className='h-full w-full flex flex-col justify-center items-center'>
             <h1>Join a chat now</h1>
             <form 
-                className='flex flex-col items-center'
+                className='flex flex-col items-center gap-2'
                 onSubmit={(e) => handleJoinChatRoom(e)}
             >
                 <div className='flex w-full max-w-sm items-center space-x-2'>

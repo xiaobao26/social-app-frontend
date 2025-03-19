@@ -110,15 +110,15 @@ const ChatRoom:React.FC = () => {
 
 
     return (
-        <div className='w-full h-full flex flex-col'>
-            <div className='bg-amber-50 flex-1/5  mb-3'>
-                <h1>Admin Broadcast Message</h1>
+        <div className='w-full h-full flex flex-col bg-gray-100 max-w-md mx-auto rounded-lg shadow-lg'>
+            <div className='flex-1 text-sm text-gray-500 my-1 text-center'>
+                <h1>Welcome chat room {roomNumber}</h1>
                 {adminMessages.map((message, index) => (
                     <p key={index}>{message}</p>
                 ))}
             </div>
 
-            <div className='bg-fuchsia-100 flex flex-col flex-1/2  mb-3'>
+            <div className='flex flex-col h-2/3 gap-2 p-3 bg-gradient-to-b from-indigo-100 to-purple-200 rounded-lg overflow-y-auto'>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline">Translate ({preferredLanguage || "Original"})</Button>
@@ -128,30 +128,65 @@ const ChatRoom:React.FC = () => {
                         <DropdownMenuSeparator />
                         <DropdownMenuRadioGroup value={preferredLanguage} onValueChange={handleLanguageChange}>
                             <DropdownMenuRadioItem value="">Show Origin</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="de">German</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="zh-Hans">Chinese (Simplified)</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="fr">French</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="de">German</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="it">Italian</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="ja">Japanese</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="ru">Russian</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="th">Thai</DropdownMenuRadioItem>
                         </DropdownMenuRadioGroup>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <h1>Users Chat Content</h1>
                 {preferredLanguage === "" 
                     ? (
                         allMessages.map((originMessage, index) => (
-                            <p key={index}>{allMessages[index].user}: {originMessage.text}</p>
+                            <div key={index} className={`flex mb-2 ${originMessage.user === userName ? `justify-end` : `justify-start`}`}>
+                                <div className='text-xs'>
+                                    {originMessage.user !== userName && (
+                                        <div className='font-light'>
+                                            {originMessage.user}:
+                                        </div>
+                                    )}
+                                    <p className='bg-gray-50 rounded-xl px-2 ml-2 font-bold'>
+                                        {originMessage.text}
+                                    </p>
+                                </div>
+                            </div>
                         ))
                     )
                     : (
                         translatedMessages.map((translatedMessage, index) => (
-                            <p key={index}>{allMessages[index].user}: {translatedMessage.translatedMessage}</p>
+                            <div key={index} className={`flex mb-2 ${allMessages[index].user === userName ? `justify-end` : `justify-start`}`}>
+                                <div className='text-xs'>
+                                    {allMessages[index].user !== userName && (
+                                        <div className='font-light'>
+                                            {allMessages[index].user}
+                                        </div>
+                                    )}
+                                    <p className='bg-gray-50 rounded-xl px-2 ml-2 font-bold'>
+                                        {translatedMessage.translatedMessage}
+                                    </p>
+                                </div>
+                            </div>
                         ))
                     )
                 }
             </div>
 
-            <div className='flex'>
-                <Input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-                <Button type="submit" onClick={handleSubmit}>Send</Button>
+            <div className='flex h-auto justify-center p-2 shadow-md gap-1'>
+                <Input value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)} 
+                    placeholder='Type a message ...'
+                    />
+                <Button 
+                    type="submit" 
+                    onClick={handleSubmit}
+                    className='hover:border-y-indigo-100'
+                >
+                    Send
+                </Button>
             </div>
         </div>
     )
